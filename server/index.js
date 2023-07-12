@@ -54,6 +54,39 @@ app.post("/login", async(req, res) =>{
     }
   });
 
+  app.delete('/user/:email', async(req, res) =>{
+    const { email } = req.params;
+    const deletedUser = await User.findOne({
+     email: email,
+})
+res.json({
+    success: true,
+    data: deletedUser,
+    message: 'user deleted successfully'
+})
+});
+
+app.put('/user/:id', async (req, res) => {
+  const { id } = req.params;
+  const { fullName, email, mobile, password } = req.body;
+
+  await User.updateOne(
+      {
+          _id: id,
+      },
+      {
+          $set: {
+              fullName,
+              email,
+              mobile,
+              password
+          },
+      })
+    });
+
+
 app.listen(PORT, () => {
     console.log(`Server started listening on ${PORT}`);
 })
+
+
