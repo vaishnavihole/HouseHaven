@@ -105,10 +105,9 @@ app.put('/user/:id', async (req, res) => {
       data: savedRoom,
       message: 'create room  successfully'
   })
-})
+});
 
 
-  
 
 app.listen(PORT, () => {
     console.log(`Server started listening on ${PORT}`);
