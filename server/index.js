@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import  Room  from './models/Room.js'
 
 import User from './models/User.js';
 dotenv.config();
@@ -84,6 +85,30 @@ app.put('/user/:id', async (req, res) => {
       })
     });
 
+
+    app.post('/room', async  (req, res) => {
+      const {roomNo, roomType, BHK, city, price, imgUrl } = req.body;
+
+      const room = new Room({
+        roomNo,
+        roomType,
+        BHK,
+        city,
+        price,
+        imgUrl
+      })
+    
+
+    const savedRoom = await room.save();
+    res.json({
+      success: true,
+      data: savedRoom,
+      message: 'create room  successfully'
+  })
+})
+
+
+  
 
 app.listen(PORT, () => {
     console.log(`Server started listening on ${PORT}`);
