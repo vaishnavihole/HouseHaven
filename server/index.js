@@ -127,6 +127,20 @@ app.get('/room/:id', async (req, res) => {
 })
 
 
+app.get('/rooms', async (req, res) => {
+  
+  const rooms = await Room.find();
+
+  res.json({ 
+    success: true, 
+    data: rooms,
+    message: 'Room fetched successfully'
+  });
+})
+
+
+
+
 
 app.listen(PORT, () => {
   console.log(`Server started listening on ${PORT}`);
