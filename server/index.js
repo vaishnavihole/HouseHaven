@@ -203,7 +203,6 @@ app.delete('/room/:id', async (req, res) => {
     })
   });
 
-
   app.get('/roomBooking/:id', async (req, res) => {
     const { id } = req.params;
   
@@ -233,13 +232,38 @@ app.delete('/room/:id', async (req, res) => {
       message: 'Room Bookings fetched successfully'
     });
   })
+
+  app.put('/roomBooking/:id',async (req, res) => {
+    const { id } = req.params;
+    const { userId, roomId, bookingStartDate, bookingEndDate } = req.body;
+  
+    await RoomBooking.updateOne(
+      {
+        _id: id,
+      },
+      {
+        $set: {
+          userId,
+          roomId,
+          bookingStartDate,
+          bookingEndDate
+        },
+      }
+    );
+  
+  
+    const updatedRoomBooking = await RoomBooking.findById(id);
+  
+    res.json({
+      success: true,
+      data: updatedRoomBooking,
+      message: "RoomBooking updated Successfully"
+  
+    })
+  })
   
    
   
-
-  
-
-
 
 
 
