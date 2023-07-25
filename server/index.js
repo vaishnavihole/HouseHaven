@@ -169,6 +169,21 @@ app.put('/room/:id',async (req, res) => {
   })
 })
 
+app.delete('/room/:id', async (req, res) => {
+    const { id } = req.params;
+    const room = await Room.deleteOne({
+      _id: id
+    });
+    res.json({
+         success: true,
+         message: "Room deleted Successfully"
+    })
+
+  })
+  
+   
+  
+
   
 
 
