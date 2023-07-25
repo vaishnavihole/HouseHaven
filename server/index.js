@@ -19,6 +19,7 @@ async function connectDB() {
 }
 connectDB();
 
+// user api
 app.post('/signup', async (req, res) => {
   const { fullName, email, mobile, password } = req.body
   const user = new User({
@@ -86,7 +87,7 @@ app.put('/user/:id', async (req, res) => {
     })
 });
 
-
+// room api 
 app.post('/room', async (req, res) => {
   const { roomNo, roomType, BHK, city, price, imgUrl } = req.body;
 
@@ -126,7 +127,6 @@ app.get('/room/:id', async (req, res) => {
   });
 
 })
-
 
 app.get('/rooms', async (req, res) => {
   
@@ -181,8 +181,9 @@ app.delete('/room/:id', async (req, res) => {
     })
 
   })
-  
 
+
+  // room booking api
   app.post('/roomBooking', async (req, res) => {
     const { userId, roomId, bookingStartDate, bookingEndDate  } = req.body;
   
@@ -201,6 +202,27 @@ app.delete('/room/:id', async (req, res) => {
       message: 'create room booking  successfully'
     })
   });
+
+
+  app.get('/roomBooking/:id', async (req, res) => {
+    const { id } = req.params;
+  
+    const roomBooking = await RoomBooking .findById(id);
+    if (!roomBooking) {
+      return res.json({
+        success: false,
+        messge: 'RoomBooking not found'
+      })
+    }
+  
+    res.json({ 
+      success: true, 
+      data: roomBooking,
+      message: 'RoomBooking fetched successfully'
+    });
+  
+  })
+  
    
   
 
