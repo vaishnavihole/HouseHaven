@@ -262,6 +262,18 @@ app.delete('/room/:id', async (req, res) => {
     })
   })
   
+
+  app.delete('/roomBooking/:id', async (req, res) => {
+    const { id } = req.params;
+    const roomBooking = await RoomBooking.deleteOne({
+      _id: id
+    });
+    res.json({
+         success: true,
+         message: "RoomBooking deleted Successfully"
+    })
+
+  })
    
   
 
