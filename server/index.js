@@ -138,6 +138,41 @@ app.get('/rooms', async (req, res) => {
   });
 })
 
+app.put('/room/:id',async (req, res) => {
+  const { id } = req.params;
+  const { roomNo, roomType, BHK, city, price, imgUrl } = req.body;
+
+  await Room.updateOne(
+    {
+      _id: id,
+    },
+    {
+      $set: {
+        roomNo,
+        roomType,
+        BHK,
+        city,
+        price,
+        imgUrl,
+      },
+    }
+  );
+
+
+  const updatedRoom = await Room.findById(id);
+
+  res.json({
+    success: true,
+    data: updatedRoom,
+    message: "Room updated Successfully"
+
+  })
+})
+
+  
+
+
+
 
 
 
