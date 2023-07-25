@@ -222,6 +222,17 @@ app.delete('/room/:id', async (req, res) => {
     });
   
   })
+
+  app.get('/roomBookings', async (req, res) => {
+  
+    const roomBookings = await RoomBooking.find();
+  
+    res.json({ 
+      success: true, 
+      data: roomBookings,
+      message: 'Room Bookings fetched successfully'
+    });
+  })
   
    
   
