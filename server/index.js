@@ -1,7 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import Room from './models/Room.js'
+import Room from './models/Room.js';
+import RoomBooking from './models/RoomBooking.js';
 
 import User from './models/User.js';
 dotenv.config();
@@ -181,6 +182,25 @@ app.delete('/room/:id', async (req, res) => {
 
   })
   
+
+  app.post('/roomBooking', async (req, res) => {
+    const { userId, roomId, bookingStartDate, bookingEndDate  } = req.body;
+  
+    const roomBooking = new RoomBooking({
+      userId,
+      roomId,
+      bookingStartDate,
+      bookingEndDate,
+    })
+  
+
+    const savedRoomBooking = await roomBooking.save();
+    res.json({
+      success: true,
+      data: savedRoomBooking,
+      message: 'create room booking  successfully'
+    })
+  });
    
   
 

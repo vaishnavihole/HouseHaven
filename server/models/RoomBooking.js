@@ -12,7 +12,7 @@ const roomBookingSchema = new Schema(
         },
         bookingStartDate: {
             type: Date,
-            require: [true, 'bookingStartDate is required']
+            required: [true, 'bookingStartDate is required']
         },
         bookingEndDate: {
             type: Date,
